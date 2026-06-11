@@ -1,37 +1,329 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Lestgo Kuy!</title>
-
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
-
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-	<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alman Julhijan — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --surface: #111111;
+    --surface2: #181818;
+    --surface3: #222222;
+    --border: rgba(255,255,255,0.08);
+    --border-accent: rgba(255,255,255,0.15);
+    --text-primary: #f0f0f0;
+    --text-secondary: #888;
+    --text-muted: #555;
+    --accent: #5B8CFF;
+    --accent-dim: rgba(91,140,255,0.15);
+    --accent-border: rgba(91,140,255,0.3);
+    --green: #3DD68C;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.08em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-right { display: flex; gap: 1rem; align-items: center; }
+  .btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; padding: 0.5rem 1.1rem; border-radius: 4px; cursor: pointer; text-decoration: none; transition: all 0.2s; border: 1px solid; display: inline-flex; align-items: center; gap: 0.4rem; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #7AA4FF; border-color: #7AA4FF; }
+  .btn-ghost { background: transparent; border-color: var(--border-accent); color: var(--text-secondary); }
+  .btn-ghost:hover { border-color: var(--text-primary); color: var(--text-primary); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 0 5rem; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  h1 em { color: var(--accent); font-style: normal; }
+  .hero-sub { font-size: 16px; color: var(--text-secondary); max-width: 500px; line-height: 1.65; margin-bottom: 2.5rem; }
+  .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+  .stats-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { padding: 1.75rem 0 1.75rem 1.75rem; border-right: 1px solid var(--border); }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--text-primary); line-height: 1; letter-spacing: -0.03em; }
+  .stat-num .a { color: var(--accent); }
+  .stat-label { font-family: var(--mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.35rem; }
+  .section { padding: 4.5rem 0; }
+  .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
+  .section-label span { color: var(--accent); }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .exp-list { display: flex; flex-direction: column; gap: 2px; }
+  .exp-row { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1.25rem 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; transition: border-color 0.2s; }
+  .exp-row:hover { border-color: var(--border-accent); }
+  .exp-company { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.15rem; }
+  .exp-role { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+  .exp-bullets { display: flex; flex-direction: column; gap: 0.45rem; }
+  .exp-bullets li { list-style: none; display: flex; gap: 0.65rem; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .exp-bullets li::before { content: '→'; color: var(--accent); font-family: var(--mono); font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+  .exp-meta { text-align: right; }
+  .exp-period { font-family: var(--mono); font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+  .exp-industry { font-size: 11px; color: var(--text-muted); margin-top: 0.2rem; }
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+  .impact-cell { background: var(--surface); padding: 1.5rem; }
+  .impact-num { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--green); line-height: 1; margin-bottom: 0.4rem; letter-spacing: -0.03em; }
+  .impact-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .impact-src { font-family: var(--mono); font-size: 10px; color: var(--text-muted); margin-top: 0.4rem; }
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1.25rem 1.5rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--border-accent); }
+  .skill-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.4rem; }
+  .skill-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+  .pill { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; padding: 0.2rem 0.55rem; border: 1px solid var(--accent-border); border-radius: 3px; color: var(--accent); background: var(--accent-dim); }
+  .about-grid { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; align-items: start; }
+  .about-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.9rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .facts { display: flex; flex-direction: column; gap: 0.6rem; }
+  .fact { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0.9rem 1rem; font-size: 13px; color: var(--text-secondary); }
+  .fact strong { display: block; font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.1rem; }
+  footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+  .footer-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+  .footer-right { display: flex; gap: 1.5rem; }
+  .footer-right a { font-family: var(--mono); font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-right a:hover { color: var(--text-primary); }
+  @media (max-width: 600px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .impact-grid { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .exp-row { grid-template-columns: 1fr; }
+    .exp-meta { text-align: left; }
+    h1 { font-size: 2.2rem; }
+  }
+</style>
 </head>
 <body>
-	<div class="container d-flex align-items-center h-100">
-		<div class="row">
-			<header class="text-center col-12">
-				<img src="logo.png" class="img-fluid" alt="Responsive image">
-				<h1 class="text-uppercase">sekolah kehidupan untuk anak muda indonesia</h1>
-			    <img src="icon/book.png" class="img-fluid" alt="Responsive image">
-			    <img src="icon/search.png" class="img-fluid" alt="Responsive image">
-			</header>
-			<div class="buffer col-12"></div>
-			<section class="text-center col-12">
-				<hr>
-				<a href="https://instagram.com/letsgo_kuy">
-					<button type="button" class="btn btn-light btn-xl">Find out more</button>	
-				</a>
-			</section>
-		</div>
-	</div>
+
+<nav>
+  <div class="nav-logo">alman<span>.</span>julhijan</div>
+  <div class="nav-right">
+    <a href="https://linkedin.com/in/alman-julhijan" class="btn btn-ghost" target="_blank">linkedin ↗</a>
+    <a href="mailto:almanjulhijan@gmail.com" class="btn btn-primary">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-eyebrow">Product Manager · Digital Identity &amp; Fintech</div>
+    <h1>Building identity<br>infrastructure at <em>scale</em></h1>
+    <p class="hero-sub">6+ years shipping KYC, fraud prevention, and identity products across Indonesia's largest digital platforms — Shopee, Tokopedia, Mekari, and GoPay.</p>
+    <div class="hero-links">
+      <a href="mailto:almanjulhijan@gmail.com" class="btn btn-primary">get in touch →</a>
+      <a href="https://linkedin.com/in/alman-julhijan" class="btn btn-ghost" target="_blank">linkedin ↗</a>
+      <a href="https://github.com/almanjulhijan/almanjulhijan" class="btn btn-ghost" target="_blank">github ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">6<span class="a">+</span></div>
+      <div class="stat-label">years experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">60<span class="a">M</span></div>
+      <div class="stat-label">users on platform</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">$100<span class="a">K</span></div>
+      <div class="stat-label">annual cost saved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2<span class="a">×</span></div>
+      <div class="stat-label">conversion improved</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section">
+    <div class="section-label"><span>01 /</span> Experience</div>
+    <div class="exp-list">
+
+      <div class="exp-row">
+        <div>
+          <div class="exp-company">GoPay (GoTo Financial)</div>
+          <div class="exp-role">Lead Product Manager — Digital Identity</div>
+          <ul class="exp-bullets">
+            <li>Leading KYC, face verification, KTP OCR, partner portal, and external integrations company-wide.</li>
+            <li>Fraud prevention via injection monitoring, anti-fraud systems, and deepfake ML models.</li>
+            <li>Shipped: Unified CIF system, KYC &amp; Login SSO for external partners, document verification pipelines.</li>
+          </ul>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">JAN 2025 — NOW</div>
+          <div class="exp-industry">Fintech</div>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div>
+          <div class="exp-company">Mekari</div>
+          <div class="exp-role">Senior Product Manager — Financial Services &amp; Digital Identity</div>
+          <ul class="exp-bullets">
+            <li>Built Indonesia's first digi-bank integrated with HR superapp for 100K+ users.</li>
+            <li>Cut p90 KYC processing time from 6 → 3 days; doubled verification conversion rate.</li>
+          </ul>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">AUG 2024 — JAN 2025</div>
+          <div class="exp-industry">HR SaaS</div>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div>
+          <div class="exp-company">Tokopedia (GoTo)</div>
+          <div class="exp-role">Product Manager — Identity</div>
+          <ul class="exp-bullets">
+            <li>Unified identity platform for 60M+ users across GoTo HoldCo, saving $100K+ annually; enabled 2s one-click login.</li>
+            <li>Launched 0-to-1 data privacy platform with consent management.</li>
+            <li>Built fraud tools: OTP abuse prevention, device fingerprinting, IP/country controls.</li>
+          </ul>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">FEB 2021 — JUL 2024</div>
+          <div class="exp-industry">E-commerce</div>
+        </div>
+      </div>
+
+      <div class="exp-row">
+        <div>
+          <div class="exp-company">Shopee</div>
+          <div class="exp-role">Associate Product Manager — Digital Goods &amp; Supply Chain</div>
+          <ul class="exp-bullets">
+            <li>Reached 2nd market position in Indonesia digital goods in under a year, launching 8 products from 0.</li>
+            <li>Halved complaint tickets and doubled CSAT with in-app dispute resolution.</li>
+          </ul>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">AUG 2019 — FEB 2021</div>
+          <div class="exp-industry">E-commerce</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" style="border-top: 1px solid var(--border); padding-top: 4.5rem;">
+    <div class="section-label"><span>02 /</span> Impact</div>
+    <div class="impact-grid">
+      <div class="impact-cell">
+        <div class="impact-num">60M+</div>
+        <div class="impact-desc">Users on unified GoTo identity platform</div>
+        <div class="impact-src">Tokopedia · 2021–2024</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">$100K</div>
+        <div class="impact-desc">Annual cost eliminated via identity consolidation</div>
+        <div class="impact-src">Tokopedia · 2021–2024</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">2×</div>
+        <div class="impact-desc">Conversion rate on business KYC verification</div>
+        <div class="impact-src">Mekari · 2024</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">−50%</div>
+        <div class="impact-desc">KYC processing time (6 days → 3 days)</div>
+        <div class="impact-src">Mekari · 2024</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">2s</div>
+        <div class="impact-desc">One-click login shipped across GoTo ecosystem</div>
+        <div class="impact-src">Tokopedia · 2022</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">#2</div>
+        <div class="impact-desc">Market position in Indonesia digital goods apps</div>
+        <div class="impact-src">Shopee · 2020</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="border-top: 1px solid var(--border); padding-top: 4.5rem;">
+    <div class="section-label"><span>03 /</span> Expertise</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">Identity &amp; KYC</div>
+        <div class="skill-desc">End-to-end verification systems — onboarding UX, ML document processing, fraud detection, and regulatory compliance (OJK, BI).</div>
+        <div class="skill-pills"><span class="pill">KYC</span><span class="pill">eKYC</span><span class="pill">OCR</span><span class="pill">Liveness</span><span class="pill">CIF</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Identity Security &amp; Fraud</div>
+        <div class="skill-desc">Fraud prevention at scale — deepfake injection, device fingerprinting, OTP abuse, IP controls, and real-time monitoring.</div>
+        <div class="skill-pills"><span class="pill">Anti-fraud</span><span class="pill">Deepfake ML</span><span class="pill">Fingerprinting</span><span class="pill">OTP security</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Platform &amp; Integration</div>
+        <div class="skill-desc">Developer-facing identity infrastructure — SSO, unified login, partner portals, and API-first design for large-scale ecosystem integrations.</div>
+        <div class="skill-pills"><span class="pill">SSO / OAuth</span><span class="pill">Partner portal</span><span class="pill">API design</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">AI Tooling</div>
+        <div class="skill-desc">Builds and deploys LLM-powered tools — document Q&amp;A bots, agentic workflows, and internal AI systems to accelerate PM work.</div>
+        <div class="skill-pills"><span class="pill">LLM</span><span class="pill">RAG</span><span class="pill">Claude API</span><span class="pill">Lark bot</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="border-top: 1px solid var(--border); padding-top: 4.5rem;">
+    <div class="section-label"><span>04 /</span> About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a PM who has spent 6+ years building identity infrastructure for Southeast Asia's largest platforms. My work sits at the intersection of user trust, regulatory compliance, and engineering systems — making sure millions of people can verify who they are quickly, safely, and without friction.</p>
+        <p>I care about the craft: writing tight specs, staying close to the technical depth behind what I'm building, and making decisions from data rather than instinct.</p>
+        <p>Outside work: bodybuilding, hiking (Merbabu, Prau), single-origin coffee, and building small AI tools that make my own work less repetitive.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>📍 Jakarta, Indonesia</strong>Based in Blok M</div>
+        <div class="fact"><strong>🎓 Industrial Engineering</strong>Parahyangan University · Scholarship</div>
+        <div class="fact"><strong>🏆 Security Hero Award</strong>Tokopedia</div>
+        <div class="fact"><strong>🌐 English · Indonesian</strong>Bilingual</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">alman julhijan · product manager · jakarta</div>
+    <div class="footer-right">
+      <a href="mailto:almanjulhijan@gmail.com">email</a>
+      <a href="https://linkedin.com/in/alman-julhijan" target="_blank">linkedin</a>
+      <a href="https://github.com/almanjulhijan/almanjulhijan" target="_blank">github</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
